@@ -4,7 +4,7 @@ const Author = require("../models/Author.js");
 // GET /authors
 exports.getAllAuthors = async (req, res) => {
   try {
-    const authors = await Author.find().populate("libros");
+    const authors = await Author.find().populate("books");
     res.json(authors);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -14,7 +14,7 @@ exports.getAllAuthors = async (req, res) => {
 // GET /authors/:id
 exports.getAuthorById = async (req, res) => {
   try {
-    const author = await Author.findById(req.params.id).populate("libros");
+    const author = await Author.findById(req.params.id).populate("books");
     if (!author)
       return res.status(404).json({ message: "Autor no encontrado" });
     res.json(author);
